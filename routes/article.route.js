@@ -18,7 +18,7 @@ res.status(404).json({ message: error.message });
 router.post('/', async (req, res) => {
 const nouvarticle = new Article(req.body)
 try {
-const response =await nouvarticle.save();
+const response =await nouvarticle.insert();
 const articles = await Article.findById(response._id).populate("scategorieID").exec();
 res.status(200).json(articles);
 } catch (error) {
