@@ -2,6 +2,7 @@ const express= require('express')
 const mongoose= require('mongoose')
 const dotenv=require('dotenv')
 const cors=require('cors')
+const path = require('path'); // Ajout de l'importation de path
 dotenv.config()
 const app=express()
 
@@ -26,10 +27,6 @@ mongoose.connect(process.env.DATABASECLOUD)
 
 
 
-app.get('/',(req,res)=>{
-    res.send("bienvenue dans notre site")
-})
-
 
 app.use("/api/categories",CategorieRouter)
 app.use("/api/scategories",ScategorieRouter)
@@ -39,7 +36,8 @@ app.use("/api/users",UserRouter)
 app.use('/api/chatbot', chatbotRequeteRouter);
 app.use('/api/payment', PaymentRouter);
 
-
+app.use(express.static(path.join(__dirname, './client/build'))); // Route pourles pages non trouvées, redirige vers index.html
+app.get('*', (req, res) => { res.sendFile(path.join(__dirname,'./client/build/index.html')); });
 app.listen(process.env.PORT,()=>{
     console.log(`serveur is listen sur port ${process.env.PORT}`)
 })
