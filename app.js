@@ -12,7 +12,9 @@ const CategorieRouter=require("./routes/categorie.route")
 const ScategorieRouter=require("./routes/scategorie.route")
 const ArticleRouter=require("./routes/article.route")
 const ChatBotRouter=require("./routes/chatbot.route")
-
+const UserRouter=require("./routes/user.route")
+const chatbotRequeteRouter = require("./routes/chatbot-requetes.route")
+const PaymentRouter=require("./routes/payment.route")
 
 
 // connexion a la base de donné
@@ -33,7 +35,9 @@ app.use("/api/categories",CategorieRouter)
 app.use("/api/scategories",ScategorieRouter)
 app.use("/api/articles",ArticleRouter)
 app.use("/api/chat",ChatBotRouter)
-
+app.use("/api/users",UserRouter)
+app.use('/api/chatbot', chatbotRequeteRouter);
+app.use('/api/payment', PaymentRouter);
 
 
 app.listen(process.env.PORT,()=>{
@@ -41,4 +45,3 @@ app.listen(process.env.PORT,()=>{
 })
 
 
-module.exports=app;

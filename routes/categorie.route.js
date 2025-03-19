@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router();
+const {verifyToken} =require("../middleware/veriftoken")
 
 // Créer une instance de categorie.
 const Categorie= require('../models/categorie');

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const SCategorie=require("../models/scategorie")
-
+const {verifyToken} =require("../middleware/veriftoken")
 
 // afficher la liste des s/categories.
 router.get('/', async (req, res, )=> {
