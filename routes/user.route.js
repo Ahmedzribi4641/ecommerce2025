@@ -6,28 +6,28 @@ const bcrypt = require('bcrypt');
 const nodemailer=require('nodemailer');
 
 
-// var transporter =nodemailer.createTransport({
-//     service:'gmail',
-//     host:'smtp.gmail.com',
-//     port:587,
-//     secure:false,
-//     auth:{
-//     user:'zribi4641@gmail.com',
-//     pass:'uucv riaf lohq vdzb'
-//     },
-//     })
-
-
 var transporter =nodemailer.createTransport({
     service:'gmail',
+    host:'smtp.gmail.com',
+    port:587,
+    secure:false,
     auth:{
     user:'zribi4641@gmail.com',
     pass:'uucv riaf lohq vdzb'
     },
-    tls:{
-    rejectUnauthorized:false
-    }
     })
+
+
+// var transporter =nodemailer.createTransport({
+//     service:'gmail',
+//     auth:{
+//     user:'zribi4641@gmail.com',
+//     pass:'uucv riaf lohq vdzb'
+//     },
+//     tls:{
+//     rejectUnauthorized:false
+//     }
+//     })
 
 //Ajouter un utilisateur                   
 router.post('/register',async(req,res)=>{
@@ -49,7 +49,7 @@ router.post('/register',async(req,res)=>{
         html:`<h2>${newUser.firstname}! thank you for registreting on our website</h2>
         <h4>please verify your email to procced.. </h4>
         <a
-        href="https://${req.headers.host}/api/users/status/edit?email=${newUser.email}">click here</a>`
+        href="http://${req.headers.host}/api/users/status/edit?email=${newUser.email}">click here</a>`  // ena fil http zedt s 7asb ch9ali chat ama be9i chyn ki nsakar el front wel back mayeteb3athch el email chyn
         }
 
         // el ba3then mn hna eli 9bal hekom tarki7 les parametre mte3 el ba3then
