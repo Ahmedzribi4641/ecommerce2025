@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
     name: item.title,
     images:[item.imageart]
     },
-    unit_amount: item.price * 100 * 0.32,  // hethi el 0.32 bech y9abel 9ad 9ad el montant ki yebda bil dollar 5ater les produit bech n7othom bil tounsi ena hethe ya3ni el taux de change betbi3a na3mlha fil projet mte3i zeda
+    unit_amount: item.price * 100 * 0.32,  // hethi el 0.32 bech y9abel 9ad 9ad el montant ki yebda bil dollar 5ater les produit bech n7othom bil tounsi ena hethe ya3ni el taux de change betbi3a na3mlha fil projet mte3i zeda  // wel *100 heki kima 9olna 5atro ye5o bil frank el stripe
     },
     quantity: item.quantity,
     })),
