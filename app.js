@@ -36,6 +36,7 @@ app.use("/api/users",UserRouter)
 app.use('/api/chatbot', chatbotRequeteRouter);
 app.use('/api/payment', PaymentRouter);
 
+// teba3 el hebergement mte3 el front 3melneh fil seance heki
 app.use(express.static(path.join(__dirname, './client/build'))); // Route pourles pages non trouvées, redirige vers index.html
 app.get('*', (req, res) => { res.sendFile(path.join(__dirname,'./client/build/index.html')); });
 app.listen(process.env.PORT,()=>{
