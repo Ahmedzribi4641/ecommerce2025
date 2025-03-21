@@ -71,7 +71,7 @@ router.post('/register',async(req,res)=>{
                 subject: "Vérification de votre email",
                 html: `<h2>${firstname}, merci de vous être inscrit !</h2>
                        <p>Veuillez vérifier votre email en cliquant sur le lien ci-dessous :</p>
-                       <a href="http://${req.headers.host}/api/users/status/edit?email=${email}">click here</a>`,
+                       <a href="https://${req.headers.host}/api/users/status/edit?email=${email}">click here</a>`,
             };
         
             try {
