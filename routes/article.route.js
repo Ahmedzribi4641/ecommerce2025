@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
 const nouvarticle = new Article(req.body)
 try {
 const response =await nouvarticle.save();
-const articles = await Article.findById(response._id).populate("scategorieID").exec();
+const articles = await Article.findById(response._id).populate("scategorieID").exec(); // bech ne5thouh bil scategorie mte3o fil affichage ya3ni juste omour affichage wkhw
 res.status(200).json(articles);
 } catch (error) {
 res.status(404).json({ message: error.message });
