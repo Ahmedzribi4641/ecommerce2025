@@ -6,28 +6,28 @@ const bcrypt = require('bcrypt');
 const nodemailer=require('nodemailer');
 
 
-// var transporter =nodemailer.createTransport({
-//     service:'gmail',
-//     host:'smtp.gmail.com',
-//     port:587,
-//     secure:false,
-//     auth:{
-//     user:'zribi4641@gmail.com',
-//     pass:'uucv riaf lohq vdzb'
-//     },
-//     })
-
-
 var transporter =nodemailer.createTransport({
     service:'gmail',
+    host:'smtp.gmail.com',
+    port:587,
+    secure:false,
     auth:{
     user:'zribi4641@gmail.com',
     pass:'uucv riaf lohq vdzb'
     },
-    tls:{
-    rejectUnauthorized:false
-    }
     })
+
+
+// var transporter =nodemailer.createTransport({
+//     service:'gmail',
+//     auth:{
+//     user:'zribi4641@gmail.com',
+//     pass:'uucv riaf lohq vdzb'
+//     },
+//     tls:{
+//     rejectUnauthorized:false
+//     }
+//     })
 
 //Ajouter un utilisateur                   
 router.post('/register',async(req,res)=>{
@@ -42,25 +42,45 @@ router.post('/register',async(req,res)=>{
 
 
         // Envoyer l'e-mail de confirmation de l'inscription
-        var mailOption ={
-        from: '"verify your email " <zribi4641@gmail.com>', // verify your email   hiya heki eli bech todhhor 3al email ml bara fil boite ya3ni
-        to: newUser.email,
-        subject: 'vérification your email ',
-        html:`<h2>${newUser.firstname}! thank you for registreting on our website</h2>
-        <h4>please verify your email to procced.. </h4>
-        <a
-        href="https://${req.headers.host}/api/users/status/edit?email=${newUser.email}">click here</a>`  // ena fil http zedt s 7asb ch9ali chat ama be9i chyn ki nsakar el front wel back mayeteb3athch el email chyn
-        }
+        // var mailOption ={
+        // from: '"verify your email " <zribi4641@gmail.com>', // verify your email   hiya heki eli bech todhhor 3al email ml bara fil boite ya3ni
+        // to: newUser.email,
+        // subject: 'vérification your email ',
+        // html:`<h2>${newUser.firstname}! thank you for registreting on our website</h2>
+        // <h4>please verify your email to procced.. </h4>
+        // <a
+        // href="http://${req.headers.host}/api/users/status/edit?email=${newUser.email}">click here</a>`  // ena fil http zedt s 7asb ch9ali chat ama be9i chyn ki nsakar el front wel back mayeteb3athch el email chyn
+        // }
 
-        // el ba3then mn hna eli 9bal hekom tarki7 les parametre mte3 el ba3then
-        transporter.sendMail(mailOption,function(error,info){
-        if(error){
-        console.log(error)
-        }
-        else{
-        console.log('verification email sent to your gmail account ')
-        }
-        })
+        // // el ba3then mn hna eli 9bal hekom tarki7 les parametre mte3 el ba3then
+        // transporter.sendMail(mailOption,function(error,info){
+        // if(error){
+        // console.log(error)
+        // }
+        // else{
+        // console.log('verification email sent to your gmail account ')
+        // }
+        // })
+
+
+        const sendVerificationEmail = async (email, firstname) => {
+            const mailOptions = {
+                from: `"Verify Your Email" <zribi4641@gmail.com>`,
+                to: email,
+                subject: "Vérification de votre email",
+                html: `<h2>${firstname}, merci de vous être inscrit !</h2>
+                       <p>Veuillez vérifier votre email en cliquant sur le lien ci-dessous :</p>
+                       <a href="https://${req.headers.host}/api/users/status/edit?email=${email}">click here</a>`,
+            };
+        
+            try {
+                await transporter.sendMail(mailOptions);
+                console.log("E-mail de vérification envoyé !");
+            } catch (error) {
+                console.error("Erreur lors de l'envoi de l'e-mail:", error);
+            }
+        };
+        await sendVerificationEmail(newUser.email, newUser.firstname);
         return res.status(201).send({ success: true, message: "Account created successfully", user: createdUser })
 
     }catch(error){
@@ -68,27 +88,6 @@ router.post('/register',async(req,res)=>{
         res.status(404).send({ success: false, message: err })
     }
 })
-
-
-
-        // const sendVerificationEmail = async (email, firstname) => {
-        //     const mailOptions = {
-        //         from: `"Verify Your Email" <zribi4641@gmail.com>`,
-        //         to: email,
-        //         subject: "Vérification de votre email",
-        //         html: `<h2>${firstname}, merci de vous être inscrit !</h2>
-        //                <p>Veuillez vérifier votre email en cliquant sur le lien ci-dessous :</p>
-        //                <a href="https://${req.headers.host}/api/users/status/edit?email=${email}">click here</a>`,
-        //     };
-        
-        //     try {
-        //         await transporter.sendMail(mailOptions);
-        //         console.log("E-mail de vérification envoyé !");
-        //     } catch (error) {
-        //         console.error("Erreur lors de l'envoi de l'e-mail:", error);
-        //     }
-        // };
-        // await sendVerificationEmail(newUser.email, newUser.firstname);
 
 
 // get sans les password
