@@ -6,28 +6,28 @@ const bcrypt = require('bcrypt');
 const nodemailer=require('nodemailer');
 
 
-var transporter =nodemailer.createTransport({
-    service:'gmail',
-    host:'smtp.gmail.com',
-    port:587,
-    secure:false,
-    auth:{
-    user:'zribi4641@gmail.com',
-    pass:'uucv riaf lohq vdzb'
-    },
-    })
-
-
 // var transporter =nodemailer.createTransport({
 //     service:'gmail',
+//     host:'smtp.gmail.com',
+//     port:587,
+//     secure:false,
 //     auth:{
 //     user:'zribi4641@gmail.com',
 //     pass:'uucv riaf lohq vdzb'
 //     },
-//     tls:{
-//     rejectUnauthorized:false
-//     }
 //     })
+
+
+var transporter =nodemailer.createTransport({
+    service:'gmail',
+    auth:{
+    user:'zribi4641@gmail.com',
+    pass:'uucv riaf lohq vdzb'
+    },
+    tls:{
+    rejectUnauthorized:false
+    }
+    })
 
 //Ajouter un utilisateur                   
 router.post('/register',async(req,res)=>{
