@@ -49,7 +49,7 @@ router.post('/register',async(req,res)=>{
         html:`<h2>${newUser.firstname}! thank you for registreting on our website</h2>
         <h4>please verify your email to procced.. </h4>
         <a
-        href="http://${req.headers.host}/api/users/status/edit?email=${newUser.email}">click here</a>`  // ena fil http zedt s 7asb ch9ali chat ama be9i chyn ki nsakar el front wel back mayeteb3athch el email chyn
+        href="https://${req.headers.host}/api/users/status/edit?email=${newUser.email}">click here</a>`  // ena fil http zedt s 7asb ch9ali chat ama be9i chyn ki nsakar el front wel back mayeteb3athch el email chyn
         }
 
         // el ba3then mn hna eli 9bal hekom tarki7 les parametre mte3 el ba3then
